@@ -34,25 +34,17 @@ function simulateRound (computer, player) {
     player = getPlayerChoice().toLocaleLowerCase();
     let result;
 
-    if (computer === 'rock' && player === 'scissors') {
-        result = 'lose';
-    } else if (computer === 'paper' && player === 'rock') {
-        result = 'lose';
-     } else if (computer === 'scissors' && player === 'paper') {
-        result = 'lose';
-     } else if (computer === 'rock' && player === 'paper') {
-        result = 'win';
-     } else if (computer === 'paper' && player === 'scissors') {
-        result = 'win';
-     } else if (computer === 'scissors' && player === 'rock') {
-        result = 'win';
-     } else if (computer === player) { 
+    if (computer === player) {
         result = 'tie';
-     } else if (computer === player) {
-        result = 'tie';
-     } else if (computer === player) {
-        result = 'tie';
-     }
+    } else if (
+        (computer === 'rock' && player === 'scissors') ||
+        (computer === 'paper' && player === 'rock') ||
+        (computer === 'scissors' && player === 'paper')
+    ) {
+        result = 'lose';
+    } else {
+        result = 'win';
+    }
 
     if (result === 'lose') {
         alert(`You lose, ${computer} beats ${player}!`);
