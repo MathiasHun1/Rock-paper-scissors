@@ -28,35 +28,36 @@ function getComputerChoice() {
     }
 }
 
-function simulateRound () {
-    computerSelection = getComputerChoice();
-    playerSelection = getPlayerChoice().toLocaleLowerCase();
+function simulateRound (computer, player) {
+    
+    computer = getComputerChoice();
+    player = getPlayerChoice().toLocaleLowerCase();
     let result;
 
-    if (computerSelection === 'rock' && playerSelection === 'scissors') {
+    if (computer === 'rock' && player === 'scissors') {
         result = 'lose';
-    } else if (computerSelection === 'paper' && playerSelection === 'rock') {
+    } else if (computer === 'paper' && player === 'rock') {
         result = 'lose';
-     } else if (computerSelection === 'scissors' && playerSelection === 'paper') {
+     } else if (computer === 'scissors' && player === 'paper') {
         result = 'lose';
-     } else if (computerSelection === 'rock' && playerSelection === 'paper') {
+     } else if (computer === 'rock' && player === 'paper') {
         result = 'win';
-     } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
+     } else if (computer === 'paper' && player === 'scissors') {
         result = 'win';
-     } else if (computerSelection === 'scissors' && playerSelection === 'rock') {
+     } else if (computer === 'scissors' && player === 'rock') {
         result = 'win';
-     } else if (computerSelection === playerSelection) { 
+     } else if (computer === player) { 
         result = 'tie';
-     } else if (computerSelection === playerSelection) {
+     } else if (computer === player) {
         result = 'tie';
-     } else if (computerSelection === playerSelection) {
+     } else if (computer === player) {
         result = 'tie';
      }
 
     if (result === 'lose') {
-        alert(`You lose, ${computerSelection} beats ${playerSelection}!`);
+        alert(`You lose, ${computer} beats ${player}!`);
     } else if (result === 'win') {
-        alert(`You win, ${playerSelection} beats ${computerSelection}!`);
+        alert(`You win, ${player} beats ${computer}!`);
     } else {
         alert('TIE!');
     }
@@ -69,7 +70,7 @@ function simulateGame() {
     let playerPoints = 0;
     let computerPoints = 0;
     for (let i = 0; i < 5; i++) {
-        result = simulateRound();
+        result = simulateRound(computerSelection, playerSelection);
 
         if (result === 'win') {
             playerPoints++;
