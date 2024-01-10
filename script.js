@@ -1,8 +1,3 @@
-// Implement a "getComputerChoice" function, that randomly returns rock/paper/scissor
-// Get a user input of rock/paper or scissor and store it in a variable. Make it case insensitive, reprompt if input is not valid
-// Compare the two variables, and announce the result
-// Store this algorithm in a "simulate round" function
-// Create a "game" function, that simulates 5 rounds, track the results, and announce the winner!
 
 
 let computerSelection;
@@ -47,41 +42,41 @@ function simulateRound (computer, player) {
     }
 
     if (result === 'lose') {
-        alert(`You lose, ${computer} beats ${player}!`);
+        // alert(`You lose, ${computer} beats ${player}!`);
     } else if (result === 'win') {
-        alert(`You win, ${player} beats ${computer}!`);
+        // alert(`You win, ${player} beats ${computer}!`);
     } else {
-        alert('TIE!');
+        // alert('TIE!');
     }
 
     return result;
 }
 
-function simulateGame() {
-    let result;
-    let playerPoints = 0;
-    let computerPoints = 0;
-    for (let i = 0; i < 5; i++) {
-        result = simulateRound(computerSelection, playerSelection);
+// function simulateGame() {
+//     let result;
+//     let playerPoints = 0;
+//     let computerPoints = 0;
+//     for (let i = 0; i < 5; i++) {
+//         result = simulateRound(computerSelection, playerSelection);
 
-        if (result === 'win') {
-            playerPoints++;
-        }
-        if (result === 'lose') {
-            computerPoints++;
-        } 
+//         if (result === 'win') {
+//             playerPoints++;
+//         }
+//         if (result === 'lose') {
+//             computerPoints++;
+//         } 
 
-        alert(`Player: ${playerPoints} Computer: ${computerPoints}`);
-    }
+//         alert(`Player: ${playerPoints} Computer: ${computerPoints}`);
+//     }
 
-    if (playerPoints > computerPoints) {
-        alert('You win the game!');
-    } else if (playerPoints < computerPoints) {
-        alert('You lose the game!');
-    } else {
-        alert('The game is a TIE!');
-    }
-}
+//     if (playerPoints > computerPoints) {
+//         alert('You win the game!');
+//     } else if (playerPoints < computerPoints) {
+//         alert('You lose the game!');
+//     } else {
+//         alert('The game is a TIE!');
+//     }
+// }
 
 
 
