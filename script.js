@@ -1,17 +1,21 @@
 const buttonRock = document.querySelector('#rock');
-buttonRock.addEventListener('click', simulateRound);
+buttonRock.addEventListener('click', () => handleButtonClick('rock'));
 const buttonPaper = document.querySelector('#paper');
-buttonPaper.addEventListener('click', simulateRound);
+buttonPaper.addEventListener('click', () => handleButtonClick('paper'));
 const buttonScissor = document.querySelector('#scissor');
-buttonScissor.addEventListener('click', simulateRound);
+buttonScissor.addEventListener('click', () => handleButtonClick('scissor'));
 
 
-function simulateRound (event) { 
+let playerPoints = 0;
+let computerPoints = 0;
 
-    const computer = getComputerChoice();
-    const player = event.target.id;
-    console.log(`computer: ${computer}`, `player: ${player}`);
+function handleButtonClick (playerChoice) {
+    let computerChoice = getComputerChoice();
+    let result = simulateRound(playerChoice, computerChoice);
+    updateGame(result);
+}
 
+function simulateRound (player, computer) { 
     if (computer === player) {
         result = 'tie';
     } else if (
@@ -23,8 +27,8 @@ function simulateRound (event) {
     } else {
         result = 'win';
     }
-
-    console.log('result: ', result);
+    console.log(result);
+    return result;
 }
 
 function getComputerChoice() {
@@ -35,6 +39,22 @@ function getComputerChoice() {
         return 'paper' 
     } else {
         return 'scissor'
+    }
+}
+
+function updateGame (result) {
+    if (result === 'win') {
+        playerPoints++;
+        console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
+    } else if (result === 'lose') {
+        computerPoints++;
+        console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
+    } else console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
+
+    if (playerPoints === 5) {
+        alert('WIN');
+    } else if (computerPoints === 5) {
+        alert('lose');
     }
 }
 
