@@ -1,15 +1,30 @@
+const buttonRock = document.querySelector('#rock');
+buttonRock.addEventListener('click', simulateRound);
+const buttonPaper = document.querySelector('#paper');
+buttonPaper.addEventListener('click', simulateRound);
+const buttonScissor = document.querySelector('#scissor');
+buttonScissor.addEventListener('click', simulateRound);
 
 
-let computerSelection;
-let playerSelection;
-simulateGame();
+function simulateRound (event) { 
 
-function getPlayerChoice() {
-    let choice;
-    do {
-        choice = prompt('Time to Choose! Rock, paper or scissors?').toLowerCase();
-    } while (choice !== 'rock' && choice !== 'paper' && choice !== 'scissors');
-    return choice;
+    const computer = getComputerChoice();
+    const player = event.target.id;
+    console.log(`computer: ${computer}`, `player: ${player}`);
+
+    if (computer === player) {
+        result = 'tie';
+    } else if (
+        (computer === 'rock' && player === 'scissor') ||
+        (computer === 'paper' && player === 'rock') ||
+        (computer === 'scissor' && player === 'paper')
+    ) {
+        result = 'lose';
+    } else {
+        result = 'win';
+    }
+
+    console.log('result: ', result);
 }
 
 function getComputerChoice() {
@@ -19,65 +34,8 @@ function getComputerChoice() {
     } else if (randomChoice === 2) {
         return 'paper' 
     } else {
-        return 'scissors'
+        return 'scissor'
     }
 }
-
-function simulateRound (computer, player) {
-    
-    computer = getComputerChoice();
-    player = getPlayerChoice().toLocaleLowerCase();
-    let result;
-
-    if (computer === player) {
-        result = 'tie';
-    } else if (
-        (computer === 'rock' && player === 'scissors') ||
-        (computer === 'paper' && player === 'rock') ||
-        (computer === 'scissors' && player === 'paper')
-    ) {
-        result = 'lose';
-    } else {
-        result = 'win';
-    }
-
-    if (result === 'lose') {
-        // alert(`You lose, ${computer} beats ${player}!`);
-    } else if (result === 'win') {
-        // alert(`You win, ${player} beats ${computer}!`);
-    } else {
-        // alert('TIE!');
-    }
-
-    return result;
-}
-
-// function simulateGame() {
-//     let result;
-//     let playerPoints = 0;
-//     let computerPoints = 0;
-//     for (let i = 0; i < 5; i++) {
-//         result = simulateRound(computerSelection, playerSelection);
-
-//         if (result === 'win') {
-//             playerPoints++;
-//         }
-//         if (result === 'lose') {
-//             computerPoints++;
-//         } 
-
-//         alert(`Player: ${playerPoints} Computer: ${computerPoints}`);
-//     }
-
-//     if (playerPoints > computerPoints) {
-//         alert('You win the game!');
-//     } else if (playerPoints < computerPoints) {
-//         alert('You lose the game!');
-//     } else {
-//         alert('The game is a TIE!');
-//     }
-// }
-
-
 
 
