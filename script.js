@@ -4,8 +4,12 @@ const buttonPaper = document.querySelector('#paper');
 buttonPaper.addEventListener('click', () => handleButtonClick('paper'));
 const buttonScissor = document.querySelector('#scissor');
 buttonScissor.addEventListener('click', () => handleButtonClick('scissor'));
+const playerScoreText = document.querySelector('#player-score');
+const computerScoreText = document.querySelector('#computer-score');
+const recentScoreText = document.querySelector('#recent-score > p');
 
-
+playerScoreText.innerText = 0;
+computerScoreText.innerText = 0;
 let playerPoints = 0;
 let computerPoints = 0;
 
@@ -22,15 +26,22 @@ function handleButtonClick (playerChoice) {
 function simulateRound (player, computer) { 
     if (computer === player) {
         result = 'tie';
+        recentScoreText.innerText = `Döntetlen!`
+        recentScoreText.style.color = 'white';
     } else if (
         (computer === 'rock' && player === 'scissor') ||
         (computer === 'paper' && player === 'rock') ||
         (computer === 'scissor' && player === 'paper')
     ) {
         result = 'lose';
+        recentScoreText.innerText = `Ezt a kört bizony elbuktad!`
+        recentScoreText.style.color = 'red';
     } else {
         result = 'win';
+        recentScoreText.innerText = `Győzött a hatodik érzéked, megnyerted a kört!`
+        recentScoreText.style.color = 'green';
     }
+
     console.log(result);
     return result;
 }
@@ -49,16 +60,18 @@ function getComputerChoice() {
 function updateGame (result) {
     if (result === 'win') {
         playerPoints++;
-        console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
+        playerScoreText.innerText = playerPoints;
+        // console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
     } else if (result === 'lose') {
         computerPoints++;
+        computerScoreText.innerText = computerPoints;
         console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
-    } else console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
+    }
 
-    if (playerPoints >= 5) {
+    if (playerPoints === 5) {
         alert('WIN');
 
-    } else if (computerPoints >= 5) {
+    } else if (computerPoints === 5) {
         alert('lose');
     }
 }
