@@ -10,6 +10,10 @@ let playerPoints = 0;
 let computerPoints = 0;
 
 function handleButtonClick (playerChoice) {
+    if (playerPoints >= 5 || computerPoints >= 5) {
+        return;
+    }
+
     let computerChoice = getComputerChoice();
     let result = simulateRound(playerChoice, computerChoice);
     updateGame(result);
@@ -51,9 +55,10 @@ function updateGame (result) {
         console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
     } else console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
 
-    if (playerPoints === 5) {
+    if (playerPoints >= 5) {
         alert('WIN');
-    } else if (computerPoints === 5) {
+
+    } else if (computerPoints >= 5) {
         alert('lose');
     }
 }
