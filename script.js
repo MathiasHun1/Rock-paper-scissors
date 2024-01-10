@@ -7,6 +7,7 @@ buttonScissor.addEventListener('click', () => handleButtonClick('scissor'));
 const playerScoreText = document.querySelector('#player-score');
 const computerScoreText = document.querySelector('#computer-score');
 const recentScoreText = document.querySelector('#recent-score > p');
+const gameResultText = document.querySelector('#result-container > h1');
 
 playerScoreText.innerText = 0;
 computerScoreText.innerText = 0;
@@ -69,10 +70,12 @@ function updateGame (result) {
     }
 
     if (playerPoints === 5) {
-        alert('WIN');
+        recentScoreText.innerText = '';
+        gameResultText.innerText = 'BAJNOK!'
 
     } else if (computerPoints === 5) {
-        alert('lose');
+        recentScoreText.innerText = '';
+        gameResultText.innerText = 'Elvesztetted a játékot'
     }
 }
 
