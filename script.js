@@ -8,9 +8,19 @@ const playerScoreText = document.querySelector('#player-score');
 const computerScoreText = document.querySelector('#computer-score');
 const recentScoreText = document.querySelector('#recent-score > p');
 const gameResultText = document.querySelector('#result-container > h1');
+const resetButton = document.querySelector('#reset > button');
+resetButton.addEventListener('click', () => {
+    playerPoints = 0;
+    computerPoints = 0;
+    playerScoreText.innerText = 0;
+    computerScoreText.innerText = 0;
+    gameResultText.innerText = '';
+    resetButton.style.display = 'none';
+})
 
 playerScoreText.innerText = 0;
 computerScoreText.innerText = 0;
+resetButton.style.display = 'none';
 let playerPoints = 0;
 let computerPoints = 0;
 
@@ -71,11 +81,13 @@ function updateGame (result) {
 
     if (playerPoints === 5) {
         recentScoreText.innerText = '';
-        gameResultText.innerText = 'BAJNOK!'
+        gameResultText.innerText = 'BAJNOK!';
+        resetButton.style.display = 'inline';
 
     } else if (computerPoints === 5) {
         recentScoreText.innerText = '';
-        gameResultText.innerText = 'Elvesztetted a játékot'
+        gameResultText.innerText = 'Elvesztetted a játékot';
+        resetButton.style.display = 'inline';
     }
 }
 
