@@ -16,8 +16,8 @@ const cumputerScoreSpan = document.querySelector('#comp-scorespan');
 resetButton.addEventListener('click', () => {
     playerPoints = 0;
     computerPoints = 0;
-    // playerScoreText.innerText = 0;
-    // cumputerScoreSpan.innerText = computerPoints;
+    playerScoreText.innerText = `Játékos: ${playerPoints}`;
+    computerScoreText.innerText = `Computer: ${computerPoints}`;
     gameResultText.innerText = '';
     resetButton.style.display = 'none';
 })
