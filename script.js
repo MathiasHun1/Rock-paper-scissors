@@ -9,17 +9,22 @@ const computerScoreText = document.querySelector('#computer-score');
 const recentScoreText = document.querySelector('#recent-score > p');
 const gameResultText = document.querySelector('#result-container > h1');
 const resetButton = document.querySelector('#reset > button');
+const playerImage = document.querySelector('#player-image');
+const computerImage = document.querySelector('#computer-image');
+const cumputerScoreSpan = document.querySelector('#comp-scorespan');
+
 resetButton.addEventListener('click', () => {
     playerPoints = 0;
     computerPoints = 0;
-    playerScoreText.innerText = 0;
-    computerScoreText.innerText = 0;
+    // playerScoreText.innerText = 0;
+    // cumputerScoreSpan.innerText = computerPoints;
     gameResultText.innerText = '';
     resetButton.style.display = 'none';
 })
 
-playerScoreText.innerText = 0;
-computerScoreText.innerText = 0;
+playerScoreText.innerText = 'Játékos: 0';
+computerScoreText.innerText = 'Computer: 0';
+
 resetButton.style.display = 'none';
 let playerPoints = 0;
 let computerPoints = 0;
@@ -53,7 +58,22 @@ function simulateRound (player, computer) {
         recentScoreText.style.color = 'green';
     }
 
-    console.log(result);
+    if (player === 'rock') {        
+        playerImage.setAttribute('src', 'images/rock2.jpeg');
+    } else if (player === 'paper') {
+        playerImage.setAttribute('src', 'images/paper2.jpeg');
+    } else {
+        playerImage.setAttribute('src', 'images/scissor.jpeg');
+    }
+
+    if (computer === 'rock') {        
+        computerImage.setAttribute('src', 'images/rock2.jpeg');
+    } else if (computer === 'paper') {
+        computerImage.setAttribute('src', 'images/paper2.jpeg');
+    } else {
+        computerImage.setAttribute('src', 'images/scissor.jpeg');
+    }
+
     return result;
 }
 
@@ -71,11 +91,10 @@ function getComputerChoice() {
 function updateGame (result) {
     if (result === 'win') {
         playerPoints++;
-        playerScoreText.innerText = playerPoints;
-        // console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
+        playerScoreText.innerText = `Játékos: ${playerPoints}`;
     } else if (result === 'lose') {
         computerPoints++;
-        computerScoreText.innerText = computerPoints;
+        computerScoreText.innerText = `Computer: ${computerPoints}`;
         console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
     }
 
@@ -89,6 +108,10 @@ function updateGame (result) {
         gameResultText.innerText = 'Elvesztetted a játékot';
         resetButton.style.display = 'inline';
     }
+}
+
+function imagePick() {
+
 }
 
 
