@@ -11,7 +11,7 @@ const gameResultText = document.querySelector('#result-container > h1');
 const resetButton = document.querySelector('#reset > button');
 const playerImage = document.querySelector('#player-image');
 const computerImage = document.querySelector('#computer-image');
-const cumputerScoreSpan = document.querySelector('#comp-scorespan');
+
 
 resetButton.addEventListener('click', () => {
     playerPoints = 0;
@@ -20,6 +20,8 @@ resetButton.addEventListener('click', () => {
     computerScoreText.innerText = `Computer: ${computerPoints}`;
     gameResultText.innerText = '';
     resetButton.style.display = 'none';
+    playerImage.setAttribute('src', 'images/empty.png');
+    computerImage.setAttribute('src', 'images/empty.png');
 })
 
 playerScoreText.innerText = 'Játékos: 0';
@@ -109,9 +111,4 @@ function updateGame (result) {
         resetButton.style.display = 'inline';
     }
 }
-
-function imagePick() {
-
-}
-
 
