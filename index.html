@@ -8,8 +8,10 @@
 </head>
 <body>
     <header>
-        <h1>Kő-Papír-Olló Ultimate</h1>
+        <h1>Kő - Papír - Olló</h1>
+        <hr>
         <h2>A játék 5 győzelemig tart</h2>
+        <hr>
         <h3>Válassz fegyvert</h3>
     </header>
     <main>
@@ -18,18 +20,32 @@
             <button class="weapon" id="paper">Papír</button>
             <button class="weapon" id="scissor">Olló</button>
         </div>
+        <div id="recent-score">
+            <p></p>
+        </div>
         <div id="scores-container">
-            <div id="player-score">
-                <p>Játékos:</p>
+            <div id="player-score-box">
+                <p id="player-score"></p>
+                <div class="image-container">
+                    
+                    <img id="player-image">
+                </div>
             </div>
-            <div id="computer-score">
-                <p>Computer:</p>
+            <div id="computer-score-box">
+                <p id="computer-score"></p>
+                <div class="image-container">
+                    
+                    <img id="computer-image">
+                </div>
             </div>
         </div>
         <div id="result-container">
-            <h3>Győztél!</h3>
+            <h1></h1>
         </div>
+        <div id="reset">
+            <button>Újra? Nemmered!</button>
+        </dvi>
     </main>
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
 </body>
 </html>

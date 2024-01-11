@@ -1,20 +1,82 @@
-// Implement a "getComputerChoice" function, that randomly returns rock/paper/scissor
-// Get a user input of rock/paper or scissor and store it in a variable. Make it case insensitive, reprompt if input is not valid
-// Compare the two variables, and announce the result
-// Store this algorithm in a "simulate round" function
-// Create a "game" function, that simulates 5 rounds, track the results, and announce the winner!
+const buttonRock = document.querySelector('#rock');
+buttonRock.addEventListener('click', () => handleButtonClick('rock'));
+const buttonPaper = document.querySelector('#paper');
+buttonPaper.addEventListener('click', () => handleButtonClick('paper'));
+const buttonScissor = document.querySelector('#scissor');
+buttonScissor.addEventListener('click', () => handleButtonClick('scissor'));
+const playerScoreText = document.querySelector('#player-score');
+const computerScoreText = document.querySelector('#computer-score');
+const recentScoreText = document.querySelector('#recent-score > p');
+const gameResultText = document.querySelector('#result-container > h1');
+const resetButton = document.querySelector('#reset > button');
+const playerImage = document.querySelector('#player-image');
+const computerImage = document.querySelector('#computer-image');
 
 
-let computerSelection;
-let playerSelection;
-simulateGame();
+resetButton.addEventListener('click', () => {
+    playerPoints = 0;
+    computerPoints = 0;
+    playerScoreText.innerText = `Játékos: ${playerPoints}`;
+    computerScoreText.innerText = `Computer: ${computerPoints}`;
+    gameResultText.innerText = '';
+    resetButton.style.display = 'none';
+    playerImage.setAttribute('src', 'images/empty.png');
+    computerImage.setAttribute('src', 'images/empty.png');
+})
 
-function getPlayerChoice() {
-    let choice;
-    do {
-        choice = prompt('Time to Choose! Rock, paper or scissors?').toLowerCase();
-    } while (choice !== 'rock' && choice !== 'paper' && choice !== 'scissors');
-    return choice;
+playerScoreText.innerText = 'Játékos: 0';
+computerScoreText.innerText = 'Computer: 0';
+
+resetButton.style.display = 'none';
+let playerPoints = 0;
+let computerPoints = 0;
+
+function handleButtonClick (playerChoice) {
+    if (playerPoints >= 5 || computerPoints >= 5) {
+        return;
+    }
+
+    let computerChoice = getComputerChoice();
+    let result = simulateRound(playerChoice, computerChoice);
+    updateGame(result);
+}
+
+function simulateRound (player, computer) { 
+    if (computer === player) {
+        result = 'tie';
+        recentScoreText.innerText = `Döntetlen!`
+        recentScoreText.style.color = 'white';
+    } else if (
+        (computer === 'rock' && player === 'scissor') ||
+        (computer === 'paper' && player === 'rock') ||
+        (computer === 'scissor' && player === 'paper')
+    ) {
+        result = 'lose';
+        recentScoreText.innerText = `Ezt a kört bizony elbuktad!`
+        recentScoreText.style.color = 'red';
+    } else {
+        result = 'win';
+        recentScoreText.innerText = `Győzött a hatodik érzéked, megnyerted a kört!`
+        recentScoreText.style.color = 'green';
+    }
+
+    if (player === 'rock') {        
+        playerImage.setAttribute('src', 'images/rock2.jpeg');
+    } else if (player === 'paper') {
+        playerImage.setAttribute('src', 'images/paper2.jpeg');
+    } else {
+        playerImage.setAttribute('src', 'images/scissor.jpeg');
+    }
+
+    if (computer === 'rock') {        
+        computerImage.setAttribute('src', 'images/rock2.jpeg');
+    } else if (computer === 'paper') {
+        computerImage.setAttribute('src', 'images/paper2.jpeg');
+    } else {
+        computerImage.setAttribute('src', 'images/scissor.jpeg');
+    }
+
+    return result;
 }
 
 function getComputerChoice() {
@@ -24,65 +86,29 @@ function getComputerChoice() {
     } else if (randomChoice === 2) {
         return 'paper' 
     } else {
-        return 'scissors'
+        return 'scissor'
     }
 }
 
-function simulateRound (computer, player) {
-    
-    computer = getComputerChoice();
-    player = getPlayerChoice().toLocaleLowerCase();
-    let result;
-
-    if (computer === player) {
-        result = 'tie';
-    } else if (
-        (computer === 'rock' && player === 'scissors') ||
-        (computer === 'paper' && player === 'rock') ||
-        (computer === 'scissors' && player === 'paper')
-    ) {
-        result = 'lose';
-    } else {
-        result = 'win';
+function updateGame (result) {
+    if (result === 'win') {
+        playerPoints++;
+        playerScoreText.innerText = `Játékos: ${playerPoints}`;
+    } else if (result === 'lose') {
+        computerPoints++;
+        computerScoreText.innerText = `Computer: ${computerPoints}`;
+        console.log(`player points: ${playerPoints}`, `computer points: ${computerPoints}`);
     }
 
-    if (result === 'lose') {
-        alert(`You lose, ${computer} beats ${player}!`);
-    } else if (result === 'win') {
-        alert(`You win, ${player} beats ${computer}!`);
-    } else {
-        alert('TIE!');
-    }
+    if (playerPoints === 5) {
+        recentScoreText.innerText = '';
+        gameResultText.innerText = 'BAJNOK!';
+        resetButton.style.display = 'inline';
 
-    return result;
-}
-
-function simulateGame() {
-    let result;
-    let playerPoints = 0;
-    let computerPoints = 0;
-    for (let i = 0; i < 5; i++) {
-        result = simulateRound(computerSelection, playerSelection);
-
-        if (result === 'win') {
-            playerPoints++;
-        }
-        if (result === 'lose') {
-            computerPoints++;
-        } 
-
-        alert(`Player: ${playerPoints} Computer: ${computerPoints}`);
-    }
-
-    if (playerPoints > computerPoints) {
-        alert('You win the game!');
-    } else if (playerPoints < computerPoints) {
-        alert('You lose the game!');
-    } else {
-        alert('The game is a TIE!');
+    } else if (computerPoints === 5) {
+        recentScoreText.innerText = '';
+        gameResultText.innerText = 'Elvesztetted a játékot';
+        resetButton.style.display = 'inline';
     }
 }
-
-
-
 
